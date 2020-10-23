@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/index.css">
+
+  <script src="./js/script.js" type="module" defer></script>
+</head>
+<body>
+  <div class="root">
+    <div class="wrapper">
+      <div id="calculator" class="calculator">
+        <div class="calculator__top">
+          <div class="calculator__history" id="history">
+            <span class="calculator__content"></span>
+          </div>
+        </div>
+        <div class="calculator__middle">
+          <div class="calculator__display" id="display">
+            <span class="calculator__content"></span>
+            <!-- 2.004007224549097e+29 -->
+          </div>
+        </div>
+        <div class="calculator__bottom">
+          <div class="calculator__row">
+            <button 
+              data-type="operator"
+              data-symbol="%"
+              class="btn btn--secondary" 
+              id="mod"
+            >%</button>
+            <button 
+              class="btn btn--secondary" 
+              id="clear"
+            >C</button>
+            <button 
+              class="btn btn--secondary" 
+              id="remove"
+            >←</button>
+            <button 
+              data-type="operator"
+              data-symbol="÷"
+              class="btn btn--primary" 
+              id="div"
+            >÷</button>
+          </div>
+          <div class="calculator__row">
+            <button 
+              data-type="number"
+              data-value="7"
+              class="btn" 
+              id="seven"
+            >7</button>
+            <button 
+              data-type="number"
+              data-value="8"
+              class="btn" 
+              id="eight"
+            >8</button>
+            <button 
+              data-type="number"
+              data-value="9"
+              class="btn" 
+              id="nine"
+            >9</button>
+            <button 
+              data-type="operator"
+              data-symbol="×"
+              class="btn btn--primary" 
+              id="mul"
+            >×</button>
+          </div>
+          <div class="calculator__row">
+            <button 
+              data-type="number"
+              data-value="4"
+              class="btn" 
+              id="four"
+            >4</button>
+            <button 
+              data-type="number"
+              data-value="5"
+              class="btn" 
+              id="five"
+            >5</button>
+            <button 
+              data-type="number"
+              data-value="6"
+              class="btn" 
+              id="six"
+            >6</button>
+            <button 
+              data-type="operator"
+              data-symbol="−"
+              class="btn btn--primary" 
+              id="sub"
+            >−</button>
+          </div>
+          <div class="calculator__row">
+            <button 
+              data-type="number"
+              data-value="1"
+              class="btn" 
+              id="one"
+            >1</button>
+            <button 
+              data-type="number"
+              data-value="2"
+              class="btn" 
+              id="two"
+            >2</button>
+            <button 
+              data-type="number"
+              data-value="3"
+              class="btn" 
+              id="three"
+            >3</button>
+            <button 
+              data-type="operator"
+              data-symbol="+"
+              class="btn btn--primary" 
+              id="add"
+            >+</button>
+          </div>
+          <div class="calculator__row">
+            <button
+              class="btn" 
+              id="negative"
+            >+/-</button>
+            <button 
+              data-type="number"
+              data-value="0"
+              class="btn" 
+              id="zero"
+            >0</button>
+            <button 
+              data-type="number"
+              data-value="."
+              class="btn" 
+              id="dot"
+            >.</button>
+            <button 
+              class="btn btn--danger" 
+              id="equal"
+            >=</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
