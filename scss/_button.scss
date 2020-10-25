@@ -32,3 +32,28 @@
     color: $white;
   }
 }
+
+#negative {
+  small:first-child {
+    display: inline-block;
+    transform: translate(1px, -4px);
+  }
+
+  small:last-child {
+    display: inline-block;
+    transform: translate(-3px, 3px);
+  }
+
+  span {
+    display: inline-block;
+    transform: rotate(10deg);
+  }
+}
+
+#dot {
+  font-size: 2.5rem;
+}
+
+#remove {
+  font-size: 1rem;
+}

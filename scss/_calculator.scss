@@ -60,8 +60,10 @@
         content: "<<";
         display: inline-block;
         left: 0;
-        top: 50%;
-        transform: translateY(-50%);
+        top: 0;
+        height: 100%;
+        padding-right: 5px;
+        background-color: $blue;
       }
     }
   }

@@ -1,9 +1,7 @@
 import Calculator from "./Calculator.js";
 
-const buttons = document.querySelectorAll(".btn");
 const clear = document.getElementById("clear");
 const remove = document.getElementById("remove");
-const dot = document.getElementById("dot");
 const negative = document.getElementById("negative");
 const equal = document.getElementById("equal");
 const history = document.getElementById("history").childNodes[1];
@@ -12,11 +10,11 @@ const numbers = document.querySelectorAll('[data-type="number"]');
 const operators = document.querySelectorAll('[data-type="operator"]');
 
 var calculator = new Calculator();
-calculator._reset();
+history.innerHTML = calculator.history;
 display.innerHTML = calculator.input;
 
-const controlHistoryFontSize = () => {
-  let length = calculator.input.length;
+const controlDisplayFontSize = (input) => {
+  let length = input.toString().length;
 
   if (length > 7) {
     display.closest("#display").classList.add("calculator__display--overflow");
@@ -27,62 +25,80 @@ const controlHistoryFontSize = () => {
 
 const controlHistoryOverflow = () => {
   const parent = history.closest("#history");
+  const historyContent = history.offsetWidth;
+  const historyContainer = parent.offsetWidth;
 
-  if (history.offsetWidth > parent.offsetWidth) {
+  if (historyContent > historyContainer) {
     parent.classList.add("calculator__history--overflow");
   } else {
     parent.classList.remove("calculator__history--overflow");
   }
 };
 
-remove.addEventListener("click", (e) => {
+remove.addEventListener("click", () => {
+  if (calculator.shouldCalculatorReset) return;
+
   display.innerHTML = calculator.remove();
-  controlHistoryFontSize();
+  controlDisplayFontSize(calculator.input);
 });
 
-clear.addEventListener("click", (e) => {
-  const [initialHistory, initialInput] = calculator.clear();
+clear.addEventListener("click", () => {
+  const [log, input] = calculator.clear();
 
-  history.innerHTML = initialHistory;
-  display.innerHTML = initialInput;
-  controlHistoryFontSize();
+  history.innerHTML = log;
+  display.innerHTML = input;
+  controlDisplayFontSize(calculator.input);
 });
 
 numbers.forEach(element => {
   element.addEventListener("click", e => {
-    if (calculator.input.length > 16) return;
+    if (calculator.shouldCalculatorReset) return;
+    if (!calculator.shouldInputModifyValue
+      && calculator.input.length > 16
+    ) return;
 
-    display.innerHTML = calculator.setInput(e.target.dataset.value, false);
-    controlHistoryFontSize();
+    display.innerHTML = calculator.setInput(e.target.dataset.value);
+    controlDisplayFontSize(calculator.input);
+
   });
 });
 
 operators.forEach(element => {
   element.addEventListener("click", e => {
-    const [result, log] = calculator.calculate(e.target.dataset.symbol);
-    console.log(result);
-    console.log(log);
+    if (calculator.shouldCalculatorReset) return;
+
+    const [result, log] = calculator.evaluate(e.target.dataset.symbol);
 
     history.innerHTML = log;
     display.innerHTML = result;
     controlHistoryOverflow();
-    controlHistoryFontSize();
+    controlDisplayFontSize(result);
+
   });
 });
 
-negative.addEventListener("click", e => {
-  display.innerHTML = calculator.setInput(null, true);
-  controlHistoryFontSize();
+negative.addEventListener("click", () => {
+  if (calculator.shouldCalculatorReset) return;
+
+  display.innerHTML = calculator.setNegativeInput();
+  controlDisplayFontSize(calculator.input);
 });
 
-equal.addEventListener("click", e => {
-  const [a, b] = calculator.equal();
+equal.addEventListener("click", () => {
+  if (calculator.shouldCalculatorReset
+    || calculator.operator === ""
+  ) return;
 
-  history.innerHTML = a;
-  display.innerHTML = b;
+  const [result, log] = calculator.equal();
+
+  display.innerHTML = result;
+  history.innerHTML = log;
+  controlHistoryOverflow();
+  controlDisplayFontSize(result);
 });
 
-console.log(calculator._format("0000043.00000"));
+// console.log(calculator._format("0000043.00000"));
+// console.log(calculator._add("-25", "-36"));
 
 // history.childNodes[1].innerHTML = "100 + 200 + 300 / 500 * 1,000 - 200,000 - 700,000 + 12";
 // history.innerHTML = "1002003005001,000 * 200,0001212121212";
