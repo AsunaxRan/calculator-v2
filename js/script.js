@@ -14,7 +14,7 @@ history.innerHTML = calculator.history;
 display.innerHTML = calculator.input;
 controlDisplayFontSize(calculator.input);
 
-const controlDisplayFontSize = (input) => {
+function controlDisplayFontSize(input) {
   let length = input.toString().length;
 
   if (length > 7) {
@@ -22,7 +22,7 @@ const controlDisplayFontSize = (input) => {
   } else {
     display.closest("#display").classList.remove("calculator__display--overflow");
   }
-};
+}
 
 const controlHistoryOverflow = () => {
   const parent = history.closest("#history");
