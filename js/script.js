@@ -12,6 +12,7 @@ const operators = document.querySelectorAll('[data-type="operator"]');
 var calculator = new Calculator();
 history.innerHTML = calculator.history;
 display.innerHTML = calculator.input;
+controlDisplayFontSize(calculator.input);
 
 const controlDisplayFontSize = (input) => {
   let length = input.toString().length;
